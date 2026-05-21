@@ -18,21 +18,33 @@ From the **`m2`** folder:
 cd m2
 pip install -r requirements.txt
 
-# Console search (point at the folder that contains index.txt, lexicon.txt, doc_ids.txt)
+# Full developer index (defaults: ../index/dev-all)
+# Console search
+python search.py
+
+# Small test (use the small index you built with m1, e.g. ../index/test)
+python search.py --index-dir ..\index\test
+
+# Or override index path explicitly
 python search.py --index-dir ..\index\dev-all
 ```
-
 If you omit `--index-dir`, it defaults to `..\index\dev-all` relative to `m2`.
 
 Type queries at the `>` prompt; type `quit` when done.
 
-The **index** must already exist (build it with the indexer first). From the **m1** folder, for example:
+The **index** folder must already exist (`index.txt`, `lexicon.txt`, `doc_ids.txt`). Build it with **m1** first (indexer).
+
+From the **`m1`** folder:
 
 ```powershell
 cd m1
 pip install -r requirements.txt
 
+# Full developer run (defaults: ../developer/DEV -> ../index/dev-all)
+python main.py
+
+# Or override paths explicitly
 python main.py --corpus ..\developer\DEV --output ..\index\dev-all --docs-per-partial 5000
 ```
 
-The output folder is created automatically. The corpus folder must already exist (your crawled JSON).
+The **output** folder is created automatically. The **corpus** folder must already exist (your crawled JSON).
