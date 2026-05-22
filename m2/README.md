@@ -32,9 +32,14 @@ If you omit `--index-dir`, it defaults to `..\index\dev-all` relative to `m2`.
 
 Type queries at the `>` prompt; type `quit` when done.
 
-The **index** folder must already exist (`index.txt`, `lexicon.txt`, `doc_ids.txt`). Build it with **m1** first (indexer).
+## Index Q/A
+The **index** folder must already exist (`index.txt`, `lexicon.txt`, `doc_ids.txt`). Build it with **m1** first (indexer) or from **m2** — same corpus/output paths; only the command differs.
 
-From the **`m1`** folder:
+**From `team` (m1):** `python main.py` runs the indexer.
+
+**From `team2` (m2):** `python main.py index …` runs the same indexer (`index` tells this `main.py` not to start the search UI). Plain `python main.py` with no `index` starts **search** instead..
+
+### Build the index from **`m1`** folder
 
 ```powershell
 cd m1
@@ -45,6 +50,19 @@ python main.py
 
 # Or override paths explicitly
 python main.py --corpus ..\developer\DEV --output ..\index\dev-all --docs-per-partial 5000
+```
+
+### Build the index from **`m2`** folder
+
+```powershell
+cd m2
+pip install -r requirements.txt
+
+# Full developer run (defaults: ../developer/DEV -> ../index/dev-all)
+python main.py index
+
+# Or override paths explicitly
+python main.py index --corpus ..\developer\DEV --output ..\index\dev-all --docs-per-partial 5000
 ```
 
 The **output** folder is created automatically. The **corpus** folder must already exist (your crawled JSON).
