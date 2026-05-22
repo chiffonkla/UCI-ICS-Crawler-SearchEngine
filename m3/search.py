@@ -116,7 +116,7 @@ def main():
     if stats is not None and stats.get("n_documents_indexed") is not None:
         n_docs = int(stats["n_documents_indexed"])
 
-    mode = "ranked (tf-idf style in query.py)" if ranked else "boolean order (--boolean)"
+    mode = "ranked" if ranked else "boolean (--boolean)"
     print("Ready -", mode, "(quit to exit).\n")
 
     while True:
