@@ -35,9 +35,9 @@ Type queries at the `>` prompt; type `quit` when done.
 ## Index Q/A
 The **index** folder must already exist (`index.txt`, `lexicon.txt`, `doc_ids.txt`). Build it with **m1** first (indexer) or from **m2** — same corpus/output paths; only the command differs.
 
-**From `team` (m1):** `python main.py` runs the indexer.
+**From `m1`:** `python main.py` runs the indexer.
 
-**From `team2` (m2):** `python main.py index …` runs the same indexer (`index` tells this `main.py` not to start the search UI). Plain `python main.py` with no `index` starts **search** instead..
+**From `m2`:** `python main.py index …` runs the same indexer (`index` tells this `main.py` not to start the search UI). Plain `python main.py` with no `index` starts **search** instead..
 
 ### Build the index from **`m1`** folder
 
