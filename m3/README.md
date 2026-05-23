@@ -56,14 +56,10 @@ python main.py --corpus ..\developer\DEV --output ..\index\dev-all --docs-per-pa
 The output folder is created automatically. The corpus folder must already exist (your crawled JSON).
 
 
-### Build the index from `m1` or `m2`
-
-You can still use **`m1`** or **`m2`** to build an index, but that index will **not** include M3 **field weights** in the postings. For M3 demos and reports, build from **`m3`** above.
-
 ---
 
 
-## How to Run (Easy Instructions)
+## How to Run (Easy Simple Instructions)
 
 **1. Build or rebuild the index** (indexer only — plain `python main.py`):
 
@@ -100,3 +96,7 @@ python search.py
 By default, **yes** — all use **`../index/dev-all`**. Building from **`m3`** **overwrites** that folder’s index files unless you pass a different **`--output`**.
 
 You do **not** have to delete **`m1`** or **`m2`**; they are separate code copies. Remove them only if you want less duplication.
+
+### Build the index from `m1` or `m2`
+
+You can still use **`m1`** or **`m2`** to build an index, but that index will **not** include M3 **field weights** in the postings. For M3 demos and reports, build from **`m3`** above.
