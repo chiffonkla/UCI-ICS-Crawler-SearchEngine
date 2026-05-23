@@ -55,11 +55,11 @@ Use **`python search.py --index-dir ..\index\test`** (or similar) if your index 
 ## Optional test index
 
 ```powershell
-cd cs-121\m1
+cd m1
 python main.py --corpus ..\analyst\ANALYST --output ..\index\test --limit 50 --docs-per-partial 8
 ```
 
 ```powershell
-cd cs-121\m2
+cd m2
 python search.py --index-dir ..\index\test
 ```
