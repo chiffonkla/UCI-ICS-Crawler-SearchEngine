@@ -11,8 +11,28 @@ TEAM_DIR = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_CORPUS = os.path.normpath(os.path.join(TEAM_DIR, "..", "developer", "DEV"))
 DEFAULT_OUTPUT = os.path.normpath(os.path.join(TEAM_DIR, "..", "index", "dev-all"))
 
+def main():
+    # Read command-line options
+    parser = argparse.ArgumentParser(description="Indexer milestone 1")
+    parser.add_argument(
+        "--corpus",
+        default=DEFAULT_CORPUS,
+        help="Folder with JSON pages (default: ../developer/DEV)",
+    )
+    parser.add_argument(
+        "--output",
+        default=DEFAULT_OUTPUT,
+        help="Output folder (default: ../index/dev-all; created if missing)",
+    )
+    parser.add_argument("--limit", type=int, default=None, help="Only load this many pages (for testing)")
+    parser.add_argument(
+        "--docs-per-partial",
+        type=int,
+        default=5000,
+        help="Write one partial index file after every N pages (default 5000).",
+    )
+    args = parser.parse_args()
 
-def run_indexer(args):
     print("Corpus:", args.corpus)
     print("Output:", args.output)
 
@@ -30,6 +50,7 @@ def run_indexer(args):
 
     documents = [page for (doc_id, page) in pages]
 
+    # Parse is inside index.py
     partialsFolder = os.path.join(args.output, "partials")
     print("Building partial index files in:", partialsFolder)
     print("(one partial file every", args.docs_per_partial, "pages)")
@@ -50,47 +71,14 @@ def run_indexer(args):
     if n_pages > 0:
         avglength = sumlengths / n_pages
 
+    # Merging partial files
     finishIndex(
         args.output,
-        nDocuments=n_pages,
+        nDocuments=len(pages),
         corpus=os.path.normpath(args.corpus),
         partialsFolder=partialsFolder,
         avglength=avglength,
     )
 
-
-def cli_main():
-    parser = argparse.ArgumentParser(description="team2: search (default) or index")
-    sub = parser.add_subparsers(dest="command")
-
-    idx = sub.add_parser("index", help="Run M1 indexer (build inverted index on disk)")
-    idx.add_argument(
-        "--corpus",
-        default=DEFAULT_CORPUS,
-        help="Folder with JSON pages (default: ../developer/DEV)",
-    )
-    idx.add_argument(
-        "--output",
-        default=DEFAULT_OUTPUT,
-        help="Output folder (default: ../index/dev-all)",
-    )
-    idx.add_argument("--limit", type=int, default=None, help="Only load this many pages (testing)")
-    idx.add_argument(
-        "--docs-per-partial",
-        type=int,
-        default=5000,
-        help="Write one partial index file after every N pages (default 5000).",
-    )
-
-    args = parser.parse_args()
-
-    if args.command == "index":
-        run_indexer(args)
-    else:
-        from search import main as search_main
-
-        search_main()
-
-
 if __name__ == "__main__":
-    cli_main()
+    main()
