@@ -97,7 +97,5 @@ def stem_query(query):
     words = tokenize(query)
     stems = []
     for word in words:
-        low = word.lower()
-        stemmed_word = stemmer.stem(low)
-        stems.append(stemmed_word)
+        stems.append(stemmer.stem(word.lower()))
     return stems
