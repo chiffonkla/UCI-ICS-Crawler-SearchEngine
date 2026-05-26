@@ -7,10 +7,10 @@ from corpus_io import get_url, read_urls
 from index_reader import line_for_term, read_lexicon
 from parse_document import stem_query
 from postings import parse_line
-from query import idf, intersect_many, ranked_pairs, wordlist_penalty
+from query import idf, intersect_many, penalty, ranked_pairs
 
 
-def score_sort_key(row):
+def sort_key(row):
     sc = row[0]
     doc_id = row[1]
     return (-sc, doc_id)
@@ -74,9 +74,9 @@ def run_query(lex, index_path, urls, text, n_docs):
         url = get_url(urls, doc_id)
         if url is None:
             url = "(no url)"
-        s = sc * wordlist_penalty(url)
+        s = sc * penalty(url)
         scored.append((s, doc_id, url))
-    scored.sort(key=score_sort_key)
+    scored.sort(key=sort_key)
 
     top = []
     seen_urls = {}
