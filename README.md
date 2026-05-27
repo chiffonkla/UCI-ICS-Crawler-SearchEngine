@@ -1,3 +1,6 @@
+# What This Is
+This repo is about ICS Crawler and ICS Search Engine. This main branch here is about crawler. LOOK at the other branches to see the milestones for the Search Engine implementation (branches m1, m2, m3).
+
 ABOUT
 -------------------------
 This is the base implementation of a full crawler that uses a spacetime
