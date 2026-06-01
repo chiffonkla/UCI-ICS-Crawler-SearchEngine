@@ -31,7 +31,7 @@ def intersect_many(lists):
         k = k + 1
     return cur
 
-# idf = log(N / df). N = corpus doc count, df = docs with this term.
+# idf = log(N / df). N = corpus doc count, df = docs with this term
 def idf(N, df):
     if df < 1:
         df = 1
@@ -39,11 +39,8 @@ def idf(N, df):
         N = 1
     return math.log(N / df)
 
-# tf-idf score with cosine-style length normalization.
-#   tf-idf per term = (1 + log(tf)) * idf       (idf = log(N/df), set above)
-#   score = sum of tf-idf over the query terms, divided by the document
-#           weight vector length sqrt(w1^2 + w2^2 + ...) so that long pages
-#           do not automatically win. Higher score = more relevant.
+# tf-idf score with cosine-style length normalization
+# tf-idf per term = (1 + log(tf)) * idf   
 def score_doc(tf_maps, idfs, doc_id, n_terms):
     s = 0.0
     sum_sq = 0.0
@@ -61,7 +58,7 @@ def score_doc(tf_maps, idfs, doc_id, n_terms):
         norm = 1.0
     return s / norm
 
-# After Boolean AND, sort by score high to low, ties broken by smaller doc_id.
+# After Boolean AND, sort by score high to low, ties broken by smaller doc_id
 def row_sort_key(row):
     sc = row[0]
     doc_id = row[1]
